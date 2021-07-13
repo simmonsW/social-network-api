@@ -14,7 +14,7 @@ const thoughtController = {
   },
   // get thought by id
   getThoughtById({ params }, res) {
-    Thought.findById({ _id: params.thoughtId })
+    Thought.findById({ _id: params.id })
       .select('-__v')
       .populate({
         path: 'reactions',
@@ -83,7 +83,7 @@ const thoughtController = {
   // POST a new reaction by thought id
   addReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
-      { _id: params.reactionId },
+      { _id: params.thoughtId },
       { $push: { reactions: body } },
       { new: true, runValidators: true }
     )
@@ -98,9 +98,9 @@ const thoughtController = {
   },
   // DELETE a reaction by id
   deleteReaction({ params }, res) {
-    Thought.findOneAndDelete(
+    Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $pull: { reactions: { reactionId: params.reactionId } } },
+      { $pull: { reactions: { _id: params.reactionId } } },
       { new: true }
     )
       .then(dbThoughtData => {
@@ -108,7 +108,8 @@ const thoughtController = {
           res.status(404).json({ message: 'No Thought found with this id!' });
           return;
         }
-        return Thought.findOneAndUpdate({})
+        // return Thought.findOneAndUpdate({};
+        res.json(dbThoughtData);
       })
       .catch(err => res.json(err));
   }

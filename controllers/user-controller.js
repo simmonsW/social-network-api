@@ -70,7 +70,7 @@ const userController = {
         // BONUS: remove a user's associated thoughts when deleted
         Thought.deleteMany({  username: dbUserData.username })
           .then((dbUserData) => {
-            res.json({ message: `Successfully deleted ${dbUserData.username}!` });
+            res.json(dbUserData);
           })
           .catch(err => res.status(400).json(err));
       })
