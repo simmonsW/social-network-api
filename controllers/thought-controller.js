@@ -23,7 +23,7 @@ const thoughtController = {
       .sort({ _id: -1 })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
-          res.status(404).json({ message: 'No thought found with this id!' });
+          res.status(404).json({ message: 'No Thought found with this id!' });
           return;
         }
         res.json(dbThoughtData);
@@ -51,9 +51,35 @@ const thoughtController = {
         res.json(dbThoughtData);
       })
       .catch(err => res.json(err));
-  }
+  },
   // PUT update thought by id
+  updateThought({ params, body }, res) {
+    Thought.findOneAndUpdate(
+        { _id: params.id},
+        body,
+        { new: true, runValidators: true}
+      )
+      .then(dbThoughtData => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: 'No Thought found with this id!' });
+          return;
+        }
+        res.json(dbThoughtData);
+      })
+      .catch(err => res.json(err));
+  },
   // DELETE thought by id
+  deleteThought({ params }, res) {
+    Thought.findOneAndDelete({ _id: params.id })
+      .then(dbThoughtData => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: 'No Thought found with this id!' });
+          return;
+        }
+        res.json(dbThoughtData);
+      })
+      .catch(err => res.json(err));
+  }
 
   // POST a new reaction by thought id
   // DELETE a reaction by id
