@@ -13,13 +13,13 @@ const {
 
 router
   .route('/')
-  .get(getAllThought)
-  .post(addThought);
+  .get(getAllThought);
 
 // /api/thoughts/:id
 
 router
   .route('/:id')
+  .post(addThought)
   .get(getThoughtById)
   .put(updateThought)
   .delete(deleteThought);

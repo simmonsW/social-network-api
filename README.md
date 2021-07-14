@@ -25,7 +25,9 @@
   Once the application is running, all the routes can be tested using Insomnia Core. Check out the following demonstration video:
 
   ## Demo Video
+  Check out the following demo video!
 
+  https://youtu.be/jodcGBJgRyQ
 
   ## Questions
   Have Questions? Ask them at <a href="http://github.com/simmonsW">simmonsW</a> or <a href="mailto:simmonsw182@gmail.com">simmonsw182@gmail.com</a>
